@@ -8,16 +8,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Arcade Vault es una plataforma de juegos online donde los usuarios compiten por la mayor cantidad de puntos.
 
-## Comandos
-
-```bash
-npm run dev      # Servidor de desarrollo (Turbopack por defecto)
-npm run build    # Build de producción (Turbopack por defecto)
-npm run start    # Servidor de producción
-npm run lint     # ESLint v9
-```
-
-Para desactivar Turbopack en build: `next build --webpack`
 
 ## Stack
 
@@ -26,6 +16,11 @@ Para desactivar Turbopack en build: `next build --webpack`
 - **TypeScript 5** — strict mode, path alias `@/*` apunta a la raíz del proyecto
 - **Tailwind CSS 4** — sintaxis `@import "tailwindcss"` (no `@tailwind base/components/utilities`)
 - **ESLint 9** — flat config en `eslint.config.mjs`, reemplaza `.eslintrc`
+
+
+## Skills
+
+Usa siempre /front-design para diseñar la interfaz de usuario.
 
 ## Arquitectura
 
