@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { saveSessionUser } from "@/components/ClientLayout";
+import { saveSessionUser } from "@/lib/session";
 
 export default function AuthPage() {
   const router = useRouter();

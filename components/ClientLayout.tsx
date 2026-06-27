@@ -3,40 +3,13 @@
 import { useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import Nav from "@/components/Nav";
-import type { SessionUser } from "@/lib/data";
+import {
+  subscribeToSession,
+  getStoredUser,
+  clearSessionUser,
+} from "@/lib/session";
 
-/* ── Micro-store de sesión ────────────────────────────────────────────── */
-
-const listeners = new Set<() => void>();
-
-function notifyListeners() {
-  listeners.forEach((cb) => cb());
-}
-
-function subscribeToUser(callback: () => void) {
-  listeners.add(callback);
-  return () => listeners.delete(callback);
-}
-
-function getStoredUser(): SessionUser | null {
-  try {
-    const raw = localStorage.getItem("av_user");
-    return raw ? (JSON.parse(raw) as SessionUser) : null;
-  } catch {
-    return null;
-  }
-}
-
-/* Funciones exportadas para que Auth y otras páginas puedan escribir sesión */
-export function saveSessionUser(user: SessionUser) {
-  localStorage.setItem("av_user", JSON.stringify(user));
-  notifyListeners();
-}
-
-export function clearSessionUser() {
-  localStorage.removeItem("av_user");
-  notifyListeners();
-}
+export { saveSessionUser, clearSessionUser } from "@/lib/session";
 
 /* ── Layout ───────────────────────────────────────────────────────────── */
 
@@ -45,7 +18,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   /* useSyncExternalStore: sin useState ni useEffect — sin cascading renders */
   const user = useSyncExternalStore(
-    subscribeToUser,
+    subscribeToSession,
     getStoredUser,
     () => null, // snapshot en SSR
   );
