@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Press_Start_2P, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import ClientLayout from "@/components/ClientLayout";
 
 /* Fuente pixel — solo peso 400 disponible en Press Start 2P */
 const pressStart2P = Press_Start_2P({
@@ -39,7 +40,7 @@ export default function RootLayout({
         <div className="av-noise" aria-hidden="true" />
         {/* Marco principal de la aplicación */}
         <div id="root">
-          {children}
+          <ClientLayout>{children}</ClientLayout>
         </div>
       </body>
     </html>
